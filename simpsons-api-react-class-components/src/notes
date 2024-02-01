@@ -1,11 +1,11 @@
 Task:
 Create an app that shows Simpsons characters, include
-a. Delete
+a. Delete (bonus: undo/undelete)
 b. Filter (search)
 c. Like
 d. Show total of liked
 e. Show character facing the correct way
-f. Sort by ASC/DESC
+f. Sort by ASC/DESC (bonus: by family name)
 And any other feature you think useful!
 
 //Alot of answers are in the todo list
@@ -17,6 +17,11 @@ And any other feature you think useful!
 - add favourite/delete button
 - think about where the state needs to live and the functions needed in the parent (lifting state)
 
+1. App
+2. Interface (bring in Characters component)
+3. Characters (will do all the mapping and produce all the character components x 50)
+4. Character component (name, quote, image & controls) - favourite & delete button
+
 LAYOUT (HARDCODE THIS TO START)
 
 Start with: Spinner + loading characters...
@@ -25,7 +30,7 @@ Header component
 
 Search component - heart icon with favourite count
 
-Character component (name, quote, image) - favourite & delete button
+Character component (name, quote, image) + controls component: favourite & delete button
 
 - use conditional rendering to make characters look in opposite direction
 

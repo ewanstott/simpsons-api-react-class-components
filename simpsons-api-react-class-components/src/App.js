@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Interface from "./components/Interface";
+import Spinner from "./components/Spinner";
 
 class App extends Component {
   state = {};
@@ -20,6 +24,7 @@ class App extends Component {
   render() {
     console.log(this.state);
     return (
+      //Bring in data when available, other wise load spinner
       <>
         <Header />
         {this.state.character ? <Interface /> : <Spinner />}

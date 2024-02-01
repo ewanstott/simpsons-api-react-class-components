@@ -19,7 +19,13 @@ class App extends Component {
 
   render() {
     console.log(this.state);
-    return <></>;
+    return (
+      <>
+        <Header />
+        {this.state.character ? <Interface /> : <Spinner />}
+        <Footer />
+      </>
+    );
   }
 }
 

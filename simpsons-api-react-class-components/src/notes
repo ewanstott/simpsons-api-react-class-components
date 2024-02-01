@@ -1,0 +1,34 @@
+Task:
+Create an app that shows Simpsons characters, include
+a. Delete
+b. Filter (search)
+c. Like
+d. Show total of liked
+e. Show character facing the correct way
+f. Sort by ASC/DESC
+And any other feature you think useful!
+
+//Alot of answers are in the todo list
+
+- loop over all characters
+- produce components for characters
+- make character look left or right (conditional rendering)
+-
+- add favourite/delete button
+- think about where the state needs to live and the functions needed in the parent (lifting state)
+
+LAYOUT (HARDCODE THIS TO START)
+
+Start with: Spinner + loading characters...
+
+Header component
+
+Search component - heart icon with favourite count
+
+Character component (name, quote, image) - favourite & delete button
+
+- use conditional rendering to make characters look in opposite direction
+
+https://ch12-thesimpsons.netlify.app/
+
+'Think about where the state lives, how to get everything into the top, then pass it down, and how to divide things up into the correct # of components

@@ -24,6 +24,11 @@ class App extends Component {
   };
 
   render() {
+    // let count = 0;
+    // this.state.characters.forEach((character) => {
+    //   if (character.favourite) count++;
+    // });
+
     //This line is using destructuring to extract the simpsons property from the state object. It assumes that your component's state has a property named simpsons.
     const { simpsons } = this.state;
 
@@ -31,10 +36,21 @@ class App extends Component {
       // Bring in data when available, otherwise load spinner
       <>
         <Header />
+        {/* <p>Characters Favourited: {count}</p> */}
         {simpsons ? (
           <>
             <Interface />
-            <Characters simpsons={simpsons} />
+            {simpsons.map((character, index) => {
+              return (
+                <Characters
+                  key={index}
+                  simpsons={character}
+                  // favourite={simpsons.favourite}
+                  favourite={character.favourite}
+                  onToggleFavourite={this.onToggleFavourite}
+                />
+              );
+            })}
           </>
         ) : (
           <Spinner />

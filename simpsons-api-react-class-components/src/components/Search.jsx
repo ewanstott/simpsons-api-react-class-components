@@ -5,6 +5,7 @@ class Search extends Component {
     const { searchTerm, onSearchChange } = this.props;
     return (
       <>
+        {/* <label htmlFor="search">Search:</label> */}
         <input
           type="text"
           placeholder="Enter character name..."
@@ -18,14 +19,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-// const Search = ({ onSearchChange }) => {
-//   return (
-//     <input
-//       type="text"
-//       placeholder="Search Simpsons characters..."
-//       onChange={(e) => onSearchChange(e.target.value)}
-console.log(e.target.value);
-//     />
-//   );
-// };

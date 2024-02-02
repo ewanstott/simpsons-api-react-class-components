@@ -6,6 +6,7 @@ import Interface from "./components/Interface";
 import Spinner from "./components/Spinner";
 import Characters from "./components/Characters";
 import "./App.css";
+import Search from "./components/Search";
 
 // data = simpsons
 // simpsons.character
@@ -30,19 +31,26 @@ class App extends Component {
     this.setState({ simpsons: data });
   };
 
+  handleSearchChange = (e) => {
+    this.setState({ searchTerm: e.target.value });
+    console.log(e.target.value);
+  };
+
   //send toggle function a character, it finds it in the parent, it toggles it and then passes it back down into the child
-  onToggleFavourite = (character) => {
+  onToggleFavourite = (clickedCharacter) => {
     const index = this.state.simpsons.findIndex(
-      (character) => character === character
+      (character) => character === clickedCharacter
     );
     const characters = [...this.state.simpsons]; //create variable -> array that holds the Simpsons characters
     characters[index].favourite = !characters[index].favourite;
     this.setState({ simpsons: characters }); //send names back upstairs
   };
 
-  onDeleteCharacter = (character) => {
+  onDeleteCharacter = (deletedCharacter) => {
     const simpsons = [...this.state.simpsons];
-    const index = simpsons.findIndex((character) => character === character);
+    const index = simpsons.findIndex(
+      (character) => character === deletedCharacter
+    );
     simpsons.splice(index, 1);
     this.setState({ simpsons });
   };
@@ -61,18 +69,26 @@ class App extends Component {
     //   });
 
     //This line is using destructuring to extract the simpsons property from the state object. It assumes that your component's state has a property named simpsons.
-    const { simpsons } = this.state;
+    const { simpsons, searchTerm } = this.state;
+
+    const filteredSimpson = simpsons.filter((character) =>
+      character.character.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
       // Bring in data when available, otherwise load spinner
       <>
         <Header />
         <div className="characters-container">
+          <Search
+            searchTerm={searchTerm}
+            onSearchChange={this.handleSearchChange}
+          />
           <p>Characters Favourited: {count}</p>
           {simpsons ? (
             <>
               <Interface />
-              {simpsons.map((character, index) => {
+              {filteredSimpson.map((character, index) => {
                 //make a seperate component here? And map in a Character component?
                 return (
                   <Characters

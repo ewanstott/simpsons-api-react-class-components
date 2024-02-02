@@ -11,7 +11,11 @@ import "./App.css";
 // simpsons.character
 
 class App extends Component {
-  state = {};
+  // state = {};
+  state = {
+    simpsons: [],
+    searchTerm: "",
+  };
 
   async componentDidMount() {
     this.getApiData();
@@ -74,7 +78,6 @@ class App extends Component {
                   <Characters
                     key={index}
                     simpsons={character}
-                    // favourite={simpsons.favourite}
                     favourite={character.favourite}
                     onToggleFavourite={this.onToggleFavourite}
                     onDeleteCharacter={this.onDeleteCharacter}

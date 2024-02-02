@@ -25,7 +25,7 @@ class Characters extends Component {
         <>
           <button
             onClick={() => {
-              this.props.onToggleFavourite(this.props.simpsons);
+              this.props.onToggleFavourite(simpsons);
             }}
           >
             Favourite

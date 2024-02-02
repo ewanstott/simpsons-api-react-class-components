@@ -27,21 +27,34 @@ class App extends Component {
   };
 
   //send toggle function a character, it finds it in the parent, it toggles it and then passes it back down into the child
-  onToggleFavourite = (item) => {
-    console.log(item);
+  onToggleFavourite = (character) => {
     const index = this.state.simpsons.findIndex(
-      (character) => character === item
+      (character) => character === character
     );
     const characters = [...this.state.simpsons]; //create variable -> array that holds the Simpsons characters
     characters[index].favourite = !characters[index].favourite;
     this.setState({ simpsons: characters }); //send names back upstairs
   };
 
+  onDeleteCharacter = (character) => {
+    const simpsons = [...this.state.simpsons];
+    const index = simpsons.findIndex((character) => character === character);
+    simpsons.splice(index, 1);
+    this.setState({ simpsons });
+  };
+
   render() {
     let count = 0;
+    // optional chaining '?'
     this.state.simpsons?.forEach((character) => {
       if (character.favourite) count++;
     });
+
+    //can also use conditional rendering:
+    // this.state.simpsons &&
+    //   this.state.simpsons.forEach((character) => {
+    //     if (character.favourite) count++;
+    //   });
 
     //This line is using destructuring to extract the simpsons property from the state object. It assumes that your component's state has a property named simpsons.
     const { simpsons } = this.state;
@@ -50,26 +63,29 @@ class App extends Component {
       // Bring in data when available, otherwise load spinner
       <>
         <Header />
-        <p>Characters Favourited: {count}</p>
-        {simpsons ? (
-          <>
-            <Interface />
-            {simpsons.map((character, index) => {
-              //make a seperate component here? And map in a Character component?
-              return (
-                <Characters
-                  key={index}
-                  simpsons={character}
-                  // favourite={simpsons.favourite}
-                  favourite={character.favourite}
-                  onToggleFavourite={this.onToggleFavourite}
-                />
-              );
-            })}
-          </>
-        ) : (
-          <Spinner />
-        )}
+        <div className="characters-container">
+          <p>Characters Favourited: {count}</p>
+          {simpsons ? (
+            <>
+              <Interface />
+              {simpsons.map((character, index) => {
+                //make a seperate component here? And map in a Character component?
+                return (
+                  <Characters
+                    key={index}
+                    simpsons={character}
+                    // favourite={simpsons.favourite}
+                    favourite={character.favourite}
+                    onToggleFavourite={this.onToggleFavourite}
+                    onDeleteCharacter={this.onDeleteCharacter}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <Spinner />
+          )}
+        </div>
         <Footer />
       </>
     );

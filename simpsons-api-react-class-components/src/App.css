@@ -1,3 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.characters-container {
+  margin-top: 500px;
+}
+
+.character {
+  margin-top: 50px;
+}
+
 /* Spinner */
 .lds-circle {
   display: inline-block;

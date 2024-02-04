@@ -16,22 +16,32 @@ class Characters extends Component {
     // console.log(simpsons[1].quote);
 
     return (
-      <div>
-        <div className="character">
+      <div className="character-card">
+        {/* <div className="character"> */}
+        <div className="character-name">
           <h2>Name: {simpsons.character}</h2>
+        </div>
+        <div className="quote-image-container">
           <p>Quote: {simpsons.quote}</p>
           <img src={simpsons.image} alt={simpsons.character} />
         </div>
-        <>
+        {/* </div> */}
+        <div className="controls">
           <button
+            className="favourite-button"
             onClick={() => {
               onToggleFavourite(simpsons);
             }}
           >
             Favourite
           </button>
-          <button onClick={() => onDeleteCharacter(simpsons)}>Delete</button>
-        </>
+          <button
+            className="delete-button"
+            onClick={() => onDeleteCharacter(simpsons)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     );
   }

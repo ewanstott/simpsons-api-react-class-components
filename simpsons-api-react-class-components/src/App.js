@@ -130,33 +130,32 @@ class App extends Component {
       // Bring in data when available, otherwise load spinner
       <>
         <Header />
-        <div className="characters-container">
-          <Search
-            searchTerm={searchTerm}
-            onSearchChange={this.handleSearchChange}
-          />
-          <Sort onChange={this.handleSortOrderChange} />
-          <p>Characters Favourited: {count}</p>
-          {simpsons ? (
-            <>
-              <Interface />
-              {sortedCharacters.map((character, index) => {
-                //make a seperate component here? And map in a Character component?
-                return (
-                  <Characters
-                    key={index}
-                    simpsons={character}
-                    favourite={character.favourite}
-                    onToggleFavourite={this.onToggleFavourite}
-                    onDeleteCharacter={this.onDeleteCharacter}
-                  />
-                );
-              })}
-            </>
-          ) : (
-            <Spinner />
-          )}
-        </div>
+        <Search
+          searchTerm={searchTerm}
+          onSearchChange={this.handleSearchChange}
+        />
+        <Sort onChange={this.handleSortOrderChange} />
+        <p className="count">Characters Favourited: {count}</p>
+        {simpsons ? (
+          <>
+            <Interface />
+            {sortedCharacters.map((character, index) => {
+              //make a seperate component here? And map in a Character component?
+              return (
+                <Characters
+                  key={index}
+                  simpsons={character}
+                  favourite={character.favourite}
+                  onToggleFavourite={this.onToggleFavourite}
+                  onDeleteCharacter={this.onDeleteCharacter}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <Spinner />
+        )}
+        {/* </div> */}
         <Footer />
       </>
     );

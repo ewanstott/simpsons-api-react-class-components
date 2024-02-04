@@ -5,7 +5,8 @@ class Sort extends Component {
     const { onChange } = this.props;
 
     return (
-      <div>
+      <div className="sort">
+        <h4>Sort: </h4>
         <select id="sortOrder" onChange={(e) => onChange(e.target.value)}>
           <option value="alphaAsc">Ascending</option>
           <option value="alphaDesc">Descending</option>

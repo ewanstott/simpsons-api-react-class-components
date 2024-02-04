@@ -12,6 +12,7 @@ class Search extends Component {
           value={searchTerm}
           onChange={onSearchChange}
           id="search"
+          className="input"
         />
       </>
     );

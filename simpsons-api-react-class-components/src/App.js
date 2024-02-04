@@ -7,6 +7,7 @@ import Spinner from "./components/Spinner";
 import Characters from "./components/Characters";
 import "./App.css";
 import Search from "./components/Search";
+import Sort from "./components/Sort";
 
 // data = simpsons
 // simpsons.character
@@ -16,6 +17,7 @@ class App extends Component {
   state = {
     simpsons: [],
     searchTerm: "",
+    sortOrder: "alphaAsc",
   };
 
   async componentDidMount() {
@@ -31,6 +33,7 @@ class App extends Component {
     this.setState({ simpsons: data });
   };
 
+  //Event handler for input - updates searchTerm property in components state
   handleSearchChange = (e) => {
     this.setState({ searchTerm: e.target.value });
     console.log(e.target.value);
@@ -47,12 +50,54 @@ class App extends Component {
   };
 
   onDeleteCharacter = (deletedCharacter) => {
-    const simpsons = [...this.state.simpsons];
-    const index = simpsons.findIndex(
-      (character) => character === deletedCharacter
+    const characters = [...this.state.simpsons];
+    const index = characters.findIndex(
+      (character) => character.character === deletedCharacter.character
     );
-    simpsons.splice(index, 1);
-    this.setState({ simpsons });
+    characters.splice(index, 1);
+    this.setState({ simpsons: characters });
+  };
+
+  handleSortOrderChange = (order) => {
+    this.setState({ sortOrder: order });
+  };
+
+  sortCharacters = (characters) => {
+    const { sortOrder } = this.state;
+    const sortedCharacters = [...characters]; //create a copy of array
+
+    switch (sortOrder) {
+      case "alphaAsc":
+        console.log("alphaAsc");
+        sortedCharacters.sort((a, b) => {
+          if (a.character > b.character) {
+            return 1;
+          }
+          if (a.character < b.character) {
+            return -1;
+          }
+          return 0;
+        });
+        break;
+
+      case "alphaDesc":
+        console.log("alphaDesc");
+        sortedCharacters.sort((a, b) => {
+          if (a.character > b.character) {
+            return -1;
+          }
+          if (a.character < b.character) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+
+      default:
+        console.log("Error");
+        break;
+    }
+    return sortedCharacters;
   };
 
   render() {
@@ -70,10 +115,16 @@ class App extends Component {
 
     //This line is using destructuring to extract the simpsons property from the state object. It assumes that your component's state has a property named simpsons.
     const { simpsons, searchTerm } = this.state;
+    // const { simpsons, searchTerm, sortOrder } = this.state;
 
-    const filteredSimpson = simpsons.filter((character) =>
+    const filteredCharacters = simpsons.filter((character) =>
       character.character.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    // console.log(filteredSimpson);
+
+    // Sort the filtered characters based on the selected sort order
+    const sortedCharacters = this.sortCharacters(filteredCharacters);
+    // const sortedCharacters = this.sortCharacters(sortOrder, filteredCharacters);
 
     return (
       // Bring in data when available, otherwise load spinner
@@ -84,11 +135,12 @@ class App extends Component {
             searchTerm={searchTerm}
             onSearchChange={this.handleSearchChange}
           />
+          <Sort onChange={this.handleSortOrderChange} />
           <p>Characters Favourited: {count}</p>
           {simpsons ? (
             <>
               <Interface />
-              {filteredSimpson.map((character, index) => {
+              {sortedCharacters.map((character, index) => {
                 //make a seperate component here? And map in a Character component?
                 return (
                   <Characters

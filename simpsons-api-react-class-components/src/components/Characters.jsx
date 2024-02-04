@@ -7,8 +7,7 @@ class Characters extends Component {
     // this.state.characters
 
     // Access the simpsons data from props
-    const { simpsons, onToggleFavourite, onDeleteCharacter, character } =
-      this.props;
+    const { simpsons, onToggleFavourite, onDeleteCharacter } = this.props;
 
     // console.log(simpsons);
     // console.log(simpsons[1].character);
@@ -31,7 +30,7 @@ class Characters extends Component {
           >
             Favourite
           </button>
-          <button onClick={() => onDeleteCharacter(character)}>Delete</button>
+          <button onClick={() => onDeleteCharacter(simpsons)}>Delete</button>
         </>
       </div>
     );

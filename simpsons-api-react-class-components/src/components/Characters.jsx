@@ -9,6 +9,10 @@ class Characters extends Component {
     // Access the simpsons data from props
     const { simpsons, onToggleFavourite, onDeleteCharacter } = this.props;
 
+    // Conditionally apply a class based on character direction --- to be finished
+    const characterDirectionClass =
+      simpsons.characterDirection === "Right" ? "right" : "left";
+
     // console.log(simpsons);
     // console.log(simpsons[1].character);
     // console.log(simpsons[1].characterDirection);
@@ -16,7 +20,7 @@ class Characters extends Component {
     // console.log(simpsons[1].quote);
 
     return (
-      <div className="character-card">
+      <div className={`character-card ${characterDirectionClass}`}>
         {/* <div className="character"> */}
         <div className="character-name">
           <h2>Name: {simpsons.character}</h2>

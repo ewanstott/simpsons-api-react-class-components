@@ -4,7 +4,7 @@
   padding: 0;
 }
 body {
-  background: #fed90f;
+  background: #ffd320;
   padding: 2rem;
 }
 /* div {
@@ -32,7 +32,7 @@ body {
   top: 135px;
   left: 140px;
   border-radius: 50%;
-  background: #fed90f;
+  background: #ffd320;
   border: solid 4px black;
   box-shadow: 1px 8px 10px #202020, inset -4px -3px rgb(197, 147, 39);
 }

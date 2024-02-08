@@ -8,6 +8,7 @@ import Characters from "./components/Characters";
 import "./App.css";
 import Search from "./components/Search";
 import Sort from "./components/Sort";
+import Joi from "joi";
 
 // data = simpsons
 // simpsons.character
@@ -33,10 +34,34 @@ class App extends Component {
     this.setState({ simpsons: data });
   };
 
+  // schema = { search: Joi.string().min(3).max(10) };
+
   //Event handler for input - updates searchTerm property in components state
-  handleSearchChange = (e) => {
+  handleUserInput = async (e) => {
     this.setState({ searchTerm: e.target.value });
-    console.log(e.target.value);
+    // console.log(e.target.value);
+    // console.log(e.target.id);
+
+    // const _joiInstance = Joi.object(this.schema);
+    const _joiInstance = Joi.object({ search: Joi.string().min(3).max(10) });
+
+    try {
+      await _joiInstance.validateAsync({ search: this.state.searchTerm });
+
+      // Clear errors when input is valid
+      this.setState({ errors: null });
+    } catch (e) {
+      // console.log(e);
+
+      const errorsMod = {};
+      e.details.forEach((error) => {
+        errorsMod[error.context.key] = error.message;
+      });
+
+      console.log(errorsMod);
+      //Put errors upstairs in the state:
+      this.setState({ errors: errorsMod });
+    }
   };
 
   //send toggle function a character, it finds it in the parent, it toggles it and then passes it back down into the child
@@ -68,7 +93,7 @@ class App extends Component {
 
     switch (sortOrder) {
       case "alphaAsc":
-        console.log("alphaAsc");
+        // console.log("alphaAsc");
         sortedCharacters.sort((a, b) => {
           if (a.character > b.character) {
             return 1;
@@ -81,7 +106,7 @@ class App extends Component {
         break;
 
       case "alphaDesc":
-        console.log("alphaDesc");
+        // console.log("alphaDesc");
         sortedCharacters.sort((a, b) => {
           if (a.character > b.character) {
             return -1;
@@ -101,6 +126,7 @@ class App extends Component {
   };
 
   render() {
+    // console.log(this.setState);
     let count = 0;
     // optional chaining '?'
     this.state.simpsons?.forEach((character) => {
@@ -130,10 +156,8 @@ class App extends Component {
       // Bring in data when available, otherwise load spinner
       <>
         <Header />
-        <Search
-          searchTerm={searchTerm}
-          onSearchChange={this.handleSearchChange}
-        />
+        <Search searchTerm={searchTerm} onUserInput={this.handleUserInput} />
+        <p>{this.state.errors && this.state.errors.search}</p>
         <Sort onChange={this.handleSortOrderChange} />
         <p className="count">Characters Favourited: {count}</p>
         {simpsons ? (

@@ -2,18 +2,21 @@ import React, { Component } from "react";
 
 class Search extends Component {
   render() {
-    const { searchTerm, onSearchChange } = this.props;
+    const { searchTerm, onUserInput } = this.props;
     return (
       <>
-        {/* <label htmlFor="search">Search:</label> */}
-        <input
-          type="text"
-          placeholder="Enter character name..."
-          value={searchTerm}
-          onChange={onSearchChange}
-          id="search"
-          className="input"
-        />
+        <div>
+          <form onChange={onUserInput} value={searchTerm}>
+            <label htmlFor="search">Search: </label>
+            <input
+              type="text"
+              placeholder="Enter character name..."
+              id="search"
+              className="input"
+            />
+            {/* <p>{this.state.errors && this.state.errors.search}</p> */}
+          </form>
+        </div>
       </>
     );
   }

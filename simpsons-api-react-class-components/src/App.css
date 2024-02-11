@@ -15,6 +15,7 @@
 .header {
   background-image: url(./components/background-the-simpsons-yellow-background-homer-simpson.jpg);
   height: 400px;
+
   background-size: cover;
 }
 
@@ -68,15 +69,13 @@ h1 {
 .character-card {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between;
-  align-items: center; */
   background-color: white;
   margin-top: 50px;
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 15px;
   padding: 1rem;
-  height: 300px;
+  height: auto;
 }
 
 .character-name {
@@ -93,14 +92,25 @@ h1 {
   font-style: italic;
 }
 
-img {
+.quote-image-container img {
   height: 200px;
+  width: auto;
+}
+
+/* Align image on the left side */
+.character-card.left .quote-image-container {
+  flex-direction: row-reverse;
+}
+
+/* Align image on the right side */
+.character-card.right .quote-image-container {
+  flex-direction: row;
 }
 
 .controls {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .favourite-button,
@@ -120,6 +130,10 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.favourite-button.active {
+  background-color: green;
 }
 
 /* Spinner */
@@ -150,5 +164,26 @@ img {
   }
   100% {
     transform: rotateY(3600deg);
+  }
+}
+@media screen and (max-width: 450px) {
+  .character-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .character-card.left.right .quote-image-container {
+    flex-direction: column;
+  }
+
+  .character-card.right .quote-image-container {
+    flex-direction: column;
+  }
+
+  .controls {
+    flex-direction: column;
+    margin-top: 20px;
   }
 }

@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Interface from "./components/Interface";
 import Spinner from "./components/Spinner";
-import Characters from "./components/Characters";
+import Character from "./components/Character";
 import "./App.css";
 import Search from "./components/Search";
 import Sort from "./components/Sort";
@@ -19,6 +19,7 @@ class App extends Component {
     simpsons: [],
     searchTerm: "",
     sortOrder: "alphaAsc",
+    favourites: {},
   };
 
   async componentDidMount() {
@@ -43,7 +44,7 @@ class App extends Component {
     // console.log(e.target.id);
 
     // const _joiInstance = Joi.object(this.schema);
-    const _joiInstance = Joi.object({ search: Joi.string().min(3).max(10) });
+    const _joiInstance = Joi.object({ search: Joi.string().min(2).max(10) });
 
     try {
       await _joiInstance.validateAsync({ search: this.state.searchTerm });
@@ -166,7 +167,7 @@ class App extends Component {
             {sortedCharacters.map((character, index) => {
               //make a seperate component here? And map in a Character component?
               return (
-                <Characters
+                <Character
                   key={index}
                   simpsons={character}
                   favourite={character.favourite}
